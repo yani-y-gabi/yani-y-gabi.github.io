@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Yani & Gabi</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900' rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Tangerine:100,300,400,500,700,900' rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Merienda:100,300,400,500,700,900' rel="stylesheet">
+  
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <link rel="shortcut icon" href="https://cdn.vuetifyjs.com/images/logos/favicon.ico">
+   
+</head>
+
+<body>
+  <div id="app">
+    <v-app>
+
+
+      <v-content>
+        <section id="hero">
+          <v-row no-gutters>
+            <v-img :min-height="'calc(100vh - ' + $vuetify.application.top + 'px)'"
+              src="fotos/bgring.jpg">
+              <v-theme-provider dark>
+                <v-container fill-height>
+                  <v-row align="center" class="grey--text mx-auto" justify="center">
+                    <v-col class="grey--text text-center" cols="12" tag="h1">
+                      <span :class="[$vuetify.breakpoint.smAndDown ? 'display-1' : 'display-2']"
+                        class="font-weight-light" style="font-family:'Tangerine'!important ;">
+                        Nos Casamos
+                      </span>
+
+                      <br>
+
+                      <span :class="[$vuetify.breakpoint.smAndDown ? 'display-3': 'display-4']"
+                        class="font-weight-black" style="font-family:'Tangerine'!important ;">
+                        Yan & Gabi
+                      </span>
+
+                    </v-col>
+
+                    <v-btn class="align-self-end  grey--text text-center" fab plain @click="$vuetify.goTo('#features')">
+                      <v-icon>mdi-chevron-double-down</v-icon>
+                    </v-btn>
+                  </v-row>
+                </v-container>
+              </v-theme-provider>
+            </v-img>
+          </v-row>
+        </section>
+
+
+        <section id="features" class="grey lighten-3">
+          <div class="py-12"></div>
+
+          <v-container class="text-center">
+            <v-row>
+              <v-col v-for="({ icon, title, text, btnText, btnUrl }, i) in features" :key="i" cols="12" md="12">
+                <v-card class="py-12 px-4" color="grey lighten-5" flat>
+                  <v-theme-provider dark>
+                    <div>
+                      <v-avatar tile size="88">
+                        <v-img :src="icon">
+                          
+                      </v-avatar>
+                    </div>
+                  </v-theme-provider>
+
+                  <v-card-title  class="justify-center font-weight-black" v-text="title"></v-card-title>
+
+                  <v-card-text class="subtitle-1" v-text="text">
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-row justify="center">
+                      <v-col>
+                        <v-btn outlined tile v-text="btnText" :href="btnUrl" target="_blank"></v-btn>
+                      </v-col>
+                    </v-row>
+                  </v-card-actions>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-container>
+
+          <div class="py-12"></div>
+        </section>
+
+        <section id="stats">
+          <v-parallax :height="$vuetify.breakpoint.smAndDown ? 700 : 500" src="fotos/paralatz.jpeg">
+            <v-container fill-height>
+              <v-row class="mx-auto">
+                <v-col v-for="{value, title, subtitle, linkacho} of stats" :key="title" cols="12" md="3">
+                  <div class="text-center">
+                    <div class="display-3 font-weight-black mb-4">
+                      <v-btn x-large v-if="title" plain :href="linkacho" target="_blank">
+                      <v-avatar tile size="88">
+                       <v-img :src="value"/>
+                        
+                      </v-avatar>
+                    </v-btn>
+                    </div>
+
+                    <div class="title font-weight-regular text-uppercase" v-text="title"></div>
+                    <div class="subtitle-1 font-weight-regular grey--text text--lighten-2 mx-auto" v-text="subtitle"></div>
+                  </div>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-parallax>
+        </section>
+
+        <section id="features-regalin" class="grey lighten-3">
+
+          <v-container class="text-center">
+
+            <v-row>
+              <v-col v-for="({ icon, text, btnText, btnUrl }, i) in regalitos" :key="i" cols="12" md="12">
+                <v-card class="py-12 px-4" color="grey lighten-3" flat>
+                  <v-theme-provider dark>
+                    <div>
+                      <v-avatar tile size="88">
+                        <v-img :src="icon" max>
+                          </v-icon>
+                      </v-avatar>
+                    </div>
+                  </v-theme-provider>
+
+
+                  <v-card-text class="subtitle-1 pt-0" v-text="text">
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-row justify="center">
+                      <v-col>
+                        <v-dialog
+                        v-model="dialog"
+                        persistent
+                        max-width="35vw"
+                      >
+                        <template v-slot:activator="{ on, attrs }">
+                          <v-btn
+                           outlined tile 
+                          v-bind="attrs"
+                            v-on="on"
+                            v-text="btnText"  
+
+                          > </v-btn>
+                        </template>
+                        <v-card>
+                          <v-card-title class="text-h5">
+                            Banco Santander
+                          </v-card-title>
+                          <v-card-text>
+                      
+Tipo y número de cuenta: Cuenta en Dólares  210-013619/0<br>
+Número de CBU: 0720210288000001361904 <br>
+Alias de CBU: YAN.SOLEDAD.CACERES<br>
+Titular de la cuenta: Caceres Yanina Soledad<br>
+Tipo y número de documento: DNI - 33914611
+
+                          </v-card-text>
+                          <v-card-actions>
+                            <v-spacer></v-spacer>
+                            
+                            <v-btn
+                               
+                              text
+                              @click="dialog = false"
+                            >
+                              Cerrar
+                            </v-btn>
+                          </v-card-actions>
+                        </v-card>
+                      </v-dialog>
+
+
+                      </v-col>
+                    </v-row>
+                  </v-card-actions>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-container>
+
+        </section>
+
+        <section id="blog" class="grey lighten-3">
+          <div class="py-6"></div>
+
+          <v-container class="text-center">
+            <v-row>
+              <v-col v-for="({ icon, title, text, btnText, btnUrl }, i) in asistencia" :key="i" cols="12" md="12">
+                <v-card class="py-12 px-4" flat>
+                  <!--  <v-theme-provider dark>
+              <div>
+                <v-avatar
+                  tile
+                  size="88"
+                >
+                  <v-img
+                    :src="icon"
+                    
+                  ></v-icon>
+                </v-avatar>
+              </div>
+            </v-theme-provider> -->
+
+                  <v-card-title class="justify-center font-weight-black text-uppercase" v-text="title"></v-card-title>
+
+                  <v-card-text class="subtitle-1" v-text="text">
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-row justify="center">
+                      <v-col>
+                        <v-btn outlined tile v-text="btnText" :href="btnUrl" target="_blank"></v-btn>
+                      </v-col>
+                    </v-row>
+                  </v-card-actions>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-container>
+
+          <div class="py-6"></div>
+        </section>
+
+        <v-sheet id="contact" class="grey lighten-3"  tag="section" tile>
+          <div class="py-5"></div>
+
+          <v-container>
+            <h4 class=" font-weight-bold mb-3 text-uppercase text-center">¡Gracias por compartir con nosotros este
+              momento!</h4>
+
+
+          </v-container>
+
+          <div class="py-5"></div>
+        </v-sheet>
+      </v-content>
+
+      <v-footer class="justify-center" color="#292929" height="50">
+        <div class="title font-weight-light grey--text text--lighten-1 text-center">
+          &copy; {{ (new Date()).getFullYear() }} — Made with 💜 by MaridoLasu
+        </div>
+      </v-footer>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify(),
+      data() {
+        return {
+          dialog:false,
+          articles: [
+            {
+              src: 'https://images.unsplash.com/photo-1423784346385-c1d4dac9893a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
+              title: 'Mobile first & Responsive',
+              text: 'Phasellus lorem enim, luctus ut velit eget, convallis egestas eros. Sed ornare ligula eget tortor tempor, quis porta tellus dictum.',
+            },
+            {
+              src: 'https://images.unsplash.com/photo-1475938476802-32a7e851dad1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
+              title: 'Think outside the box',
+              text: 'Nam ut leo ipsum. Maecenas pretium aliquam feugiat. Aenean vel tempor est, vitae tincidunt risus. Sed sodales vestibulum nibh.',
+            },
+            {
+              src: 'https://images.unsplash.com/photo-1416339442236-8ceb164046f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1892&q=80',
+              title: 'Small changes, big difference',
+              text: 'Vestibulum in dictum velit, in rhoncus nibh. Maecenas neque libero, interdum a dignissim in, aliquet vitae lectus. Phasellus lorem enim, luctus ut velit eget.',
+            },
+          ],
+          features: [
+            {
+              icon: 'https://www.svgrepo.com/show/7007/man-in-a-party-dancing-with-people.svg',
+              title: 'Fiesta',
+              text: 'Celebraremos a las 20:00 horas en Quinta David, Quilmes. Tocá el botón de abajo para recibir las indicaciones para llegar. ¡Te esperamos!',
+              btnUrl: 'https://maps.app.goo.gl/ghVs3bDhkywyKNpk8',
+              btnText: 'LLEGAR A LA FIESTA'
+            },
+          ],
+          asistencia: [
+            {
+              icon: 'https://www.svgrepo.com/show/7007/man-in-a-party-dancing-with-people.svg',
+              title: '¡Por favor confirmar asistencia!',
+              text: 'Te esperamos...',
+              btnUrl: 'https://forms.gle/2htNzx6hyEeaQr6L9',
+              btnText: 'CONFIRMACION'
+            },
+          ],
+          regalitos: [
+            {
+              icon: 'fotos/icono-regalo.svg',
+              text: 'Si querés hacernos un regalo, podes colaborar con nuestra luna de miel...',
+              btnUrl: 'https://maps.app.goo.gl/ghVs3bDhkywyKNpk8',
+              btnText: 'VER DATOS'
+            },
+          ],
+          stats: [
+            { linkacho:"https://instagram.com/yanygabi.casorio?igshid=YmMyMTA2M2Y=",title: "#yanygabi", subtitle: "Etiquetanos y seras uno de nuestros fotografos ...", value: "fotos/instagram-logo-svgrepo-com.svg" },
+            { linkacho:"",title: "", subtitle: "", value: " " },
+            { linkacho:"",title: "", subtitle: "", value: " " },
+            { linkacho:"https://open.spotify.com/playlist/4N4a5q8SEppCXaw7k0i5RZ?si=ETSsgZXBS6auxhYtsekYkQ&utm_source=whatsapp&pt=54c921d10a0e0e51633f335e66a9caf7",title: "Casorio Playlist", subtitle: "Agrega la cancion que no puede faltar ...", value: "fotos/spotify-svgrepo-com.svg" },
+          ],
+        }
+      }
+    })
+
+  //
+  </script>
+</body>
+
+</html>
